@@ -1,0 +1,35 @@
+---
+profile:
+  name: "Container Policy Rules"
+  description: "FinShare Container Policy Rules"
+
+line_rules:
+
+  LABEL:
+    paramSyntaxRegex: /.+/
+
+    # Use defined_label_rules to define a set of labels for your dockerfile
+
+    # A label value is 'valid' if it matches the regular expression 'valueRegex',
+    # otherwise a warning is logged with the string "message" at level 'level'.
+    # 'reference_url' provides a web link where the user can get more information
+    # about the rule.
+
+    defined_namevals:
+      maintainer:
+        valueRegex: /[\w]+/
+        message: "Label 'maintainer' is missing or has invalid format"
+        level: "warn"
+        required: true
+        reference_url:
+
+required_instructions:
+  -
+    instruction: "LABEL"
+    count: 1
+    description: "Labels are needed because...."
+    level: error
+    message: "No LABELs are defined"
+    reference_url:
+      - "https://docs.docker.com/engine/reference/builder/"
+      - "#label"
